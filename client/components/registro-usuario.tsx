@@ -45,12 +45,12 @@ export function RegistroUsuario() {
       console.log('Dados de registro:', { email, senha })
 
       try { 
-        const response = await fetch('http://localhost:3001/registro', {
+        const response = await  fetch('http://localhost:3001/registro', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, senha })
         })
-        console.log(response.json())
+        console.log(response)
         if (!response.ok) {
           return setErro('Erro ao criar conta')
         }

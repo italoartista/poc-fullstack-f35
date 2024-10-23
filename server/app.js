@@ -8,7 +8,7 @@ const pg = require('pg'); // Importa o módulo pg para interagir com o PostgreSQ
 const { Pool } = pg; // Extrai a classe Pool do módulo pg
 
 // Configura a conexão com o banco de dados PostgreSQL
-const client = new Pool({
+const pool = new Pool({
     user: 'postgres', // Nome de usuário do banco de dados
     host: 'localhost', // Host do banco de dados
     database: 'ecommerce', // Nome do banco de dados
@@ -21,6 +21,10 @@ const port = 3001; // Define a porta em que o servidor irá rodar
 app.use(express.json()); // Middleware para parsear requisições com JSON
 app.use(cors()); // Middleware para habilitar CORS
 
+function criptografarSenha(senha){
+    const salt = bcrypt.genSaltSync(10)
+    return bcrypt.hashSync(senha, salt);
+}
 // Define a rota POST /registro para registrar novos usuários
 app.post('/registro', (req, res) => {
     /* 
@@ -30,8 +34,25 @@ app.post('/registro', (req, res) => {
         - Inserir usuário no banco de dados
         - Retornar resposta apropriada
     */
-});
+    // const senha = req.body.senha
+    // const email = req.body.email
 
+    const {email, senha } = req.body
+
+
+    const senhaCriptografada = criptografarSenha(senha);
+    console.log(email,  senhaCriptografada);
+
+
+    const query = "INSERT INTO usuarios (email, senha, data_registro) VALUES ($1, $2, NOW())"
+    pool.query(query, [email, senhaCriptografada], (error, result) =>{
+        if(error){
+            console.error(error);
+            return res.status(400).send('Erro ao registrar usuário');
+            }
+            res.status(201).send('Usuário registrado com sucesso');
+    });
+    });
 // Define a rota POST /login para autenticar usuários
 app.post('/login', (req, res) => {
     /* 
