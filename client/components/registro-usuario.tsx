@@ -45,7 +45,7 @@ export function RegistroUsuario() {
       console.log('Dados de registro:', { email, senha })
 
       try { 
-        const response = await fetch('http://localhost:3001/registro', {
+        const response = await fetch('http://localhost:3003/registro', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, senha })
