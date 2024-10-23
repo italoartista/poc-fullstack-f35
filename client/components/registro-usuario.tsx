@@ -8,6 +8,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { CheckCircle2, AlertCircle } from "lucide-react"
 
+
+
+
 export function RegistroUsuario() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
