@@ -79,7 +79,8 @@ export function RegistroUsuario() {
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="email"
+                data-test='email'
+                type="text"
                 placeholder="seu@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -89,6 +90,7 @@ export function RegistroUsuario() {
               <Label htmlFor="senha">Senha</Label>
               <Input
                 id="senha"
+                data-test='senha'
                 type="password"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
@@ -99,6 +101,7 @@ export function RegistroUsuario() {
               <Input
                 id="confirmacao-senha"
                 type="password"
+                data-test='csenha'
                 value={confirmacaoSenha}
                 onChange={(e) => setConfirmacaoSenha(e.target.value)}
               />
